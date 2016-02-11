@@ -10,7 +10,7 @@ rewards_xhttp.onload = function(){
 };
 
 function rewards_xhttploadContent(){
-		rewardsjson = JSON.parse(rewards_xhttp.responseText);
+		var rewardsjson = JSON.parse(rewards_xhttp.responseText);
 		var content = ' ';
 		content += '<div class="col-sm-12">';
 		content += '<h2>'+rewardsjson.h2+'</h2>';

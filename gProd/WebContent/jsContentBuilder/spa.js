@@ -10,7 +10,7 @@ spa_xhttp.onload = function(){
 };
 
 function spa_xhttploadContent(){
-		spajson = JSON.parse(spa_xhttp.responseText);
+		var spajson = JSON.parse(spa_xhttp.responseText);
 		var content = ' ';
 		content += '<div class="col-sm-12">';
 		content += '<h2>'+spajson.h2+'</h2>';

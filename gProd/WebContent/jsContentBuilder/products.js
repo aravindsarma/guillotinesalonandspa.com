@@ -10,7 +10,7 @@ products_xhttp.onload = function(){
 };
 
 function products_xhttploadContent(){
-		productsjson = JSON.parse(products_xhttp.responseText);
+		var productsjson = JSON.parse(products_xhttp.responseText);
 		var content = ' ';
 		content += '<div class="col-sm-12">';
 		content += '<h2>'+productsjson.h2+'</h2>';

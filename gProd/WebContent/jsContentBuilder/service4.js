@@ -10,10 +10,10 @@ service4_xhttp.onload = function(){
 };
 
 function service4_xhttploadContent(){
-		service4json = JSON.parse(service4_xhttp.responseText);
+		var service4json = JSON.parse(service4_xhttp.responseText);
 		var content = ' ';
 		content += '<div class="wrap-image">';
-		content += '<div class="service4 wow fadeIn">';
+		content += '<div class="service4 fadeIn">';
 		content += '<div class="Center-Container is-Table">';
 		content += '<div class="Table-Cell">';
 		content += '<div class="Center-Block">';

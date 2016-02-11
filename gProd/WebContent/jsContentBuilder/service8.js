@@ -10,10 +10,10 @@ service8_xhttp.onload = function(){
 };
 
 function service8_xhttploadContent(){
-		service8json = JSON.parse(service8_xhttp.responseText);
+		var service8json = JSON.parse(service8_xhttp.responseText);
 		var content = ' ';
 		content += '<div class="wrap-image">';
-		content += '<div class="service8 wow fadeIn">';
+		content += '<div class="service8 fadeIn">';
 		content += '<div class="Center-Container is-Table">';
 		content += '<div class="Table-Cell">';
 		content += '<div class="Center-Block">';

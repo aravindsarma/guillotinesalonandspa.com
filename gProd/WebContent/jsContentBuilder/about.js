@@ -10,7 +10,7 @@ about_xhttp.onload = function(){
 };
 
 function about_xhttploadContent(){
-		aboutjson = JSON.parse(about_xhttp.responseText);
+		var aboutjson = JSON.parse(about_xhttp.responseText);
 		var content = ' ';
 		content += '<div class="col-sm-12">';
 		content += '<h2>'+aboutjson.h2+'</h2>';

@@ -10,10 +10,10 @@ service6_xhttp.onload = function(){
 };
 
 function service6_xhttploadContent(){
-		service6json = JSON.parse(service6_xhttp.responseText);
+		var service6json = JSON.parse(service6_xhttp.responseText);
 		var content = ' ';
 		content += '<div class="wrap-image">';
-		content += '<div class="service6 wow fadeIn">';
+		content += '<div class="service6 fadeIn">';
 		content += '<div class="Center-Container is-Table">';
 		content += '<div class="Table-Cell">';
 		content += '<div class="Center-Block">';

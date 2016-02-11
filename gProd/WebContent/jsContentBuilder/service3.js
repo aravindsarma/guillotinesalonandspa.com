@@ -10,10 +10,10 @@ service3_xhttp.onload = function(){
 };
 
 function service3_xhttploadContent(){
-		service3json = JSON.parse(service3_xhttp.responseText);
+		var service3json = JSON.parse(service3_xhttp.responseText);
 		var content = ' ';
 		content += '<div class="wrap-image">';
-		content += '<div class="service3 wow fadeIn">';
+		content += '<div class="service3 fadeIn">';
 		content += '<div class="Center-Container is-Table">';
 		content += '<div class="Table-Cell">';
 		content += '<div class="Center-Block">';

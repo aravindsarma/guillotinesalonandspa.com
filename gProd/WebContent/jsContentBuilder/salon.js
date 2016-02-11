@@ -10,7 +10,7 @@ salon_xhttp.onload = function(){
 };
 
 function salon_xhttploadContent(){
-		salonjson = JSON.parse(salon_xhttp.responseText);
+		var salonjson = JSON.parse(salon_xhttp.responseText);
 		var content = ' ';
 		content += '<div class="col-sm-12">';
 		content += '<h2>'+salonjson.h2+'</h2>';
