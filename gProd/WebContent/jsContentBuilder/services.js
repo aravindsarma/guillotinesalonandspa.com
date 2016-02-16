@@ -20,7 +20,16 @@ xhr.onload = function() {                       // When readystate changes
       }
       
       if (responseObject.lines[i].service != 'skincare' && responseObject.lines[i].service != 'microderm' &&
-    	  responseObject.lines[i].service != 'hairremoval' && responseObject.lines[i].service != 'massage') { 
+    	  responseObject.lines[i].service != 'hairremoval' && responseObject.lines[i].service != 'massage') {
+    	  if(responseObject.lines[i].service == 'haircolor' && responseObject.lines[i-1].style == 'balayage' && i != 0){
+    		  newContent += '<tr>';
+    		  newContent += '<td></td>';
+    		  newContent += '<td>&nbsp;&nbsp; designer</td>';
+    		  newContent += '<td>creative designer</td>';
+    		  newContent += '<td>master designer</td>';
+    		  newContent += '<td>expert designer</td>';
+       	      newContent += '</tr>'; 
+    	  }
 	      newContent += '<tr>';
 	      newContent += '<td>' + responseObject.lines[i].style + '</td>';
 	      newContent += '<td>' + responseObject.lines[i].designer + '</td>';
@@ -31,16 +40,28 @@ xhr.onload = function() {                       // When readystate changes
 	      if ((i+1) === responseObject.lines.length) {
 	    	  document.getElementById(responseObject.lines[i].service).innerHTML = newContent;
 	      }
-      }   //not skincare and microderm and hairremoval
-      else {
-    	  
-    	  if (responseObject.lines[i].service == 'hairremoval' && responseObject.lines[i-1].service != 'hairremoval' && i != 0) {
+      } //not skincare and microderm and hairremoval
+      else if(responseObject.lines[i].service == 'hairremoval') {
+    	  if(responseObject.lines[i].service == 'hairremoval' && responseObject.lines[i-1].service != 'hairremoval' && i != 0){
     		  newContent += '<tr>';
-        	  newContent += '<td></td>';
-        	  newContent += '<td>Waxing</td>';
-    	      newContent += '<td>Sugaring</td>';
-    	      newContent += '</tr>';
-    	  }  
+       		  newContent += '<td></td>';
+           	  newContent += '<td></td>';
+           	  newContent += '<td>Waxing</td>';
+       	      newContent += '<td>Sugaring</td>';
+       	      newContent += '</tr>'; 
+    	  }
+  
+    	  newContent += '<tr>';
+    	  newContent += '<td>' + responseObject.lines[i].style + '</td>';
+    	  newContent += '<td>' + responseObject.lines[i].designer + '</td>';
+    	  newContent += '<td>' + responseObject.lines[i].masterDesigner + '</td>';
+	      newContent += '<td>' + responseObject.lines[i].expertDesigner + '</td>';
+	      newContent += '</tr>';
+	      if ((i+1) === responseObject.lines.length) {
+	    	  document.getElementById(responseObject.lines[i].service).innerHTML = newContent;
+	      }
+      }
+      else {
     	  newContent += '<tr>';
     	  newContent += '<td>' + responseObject.lines[i].style + '</td>';
     	  newContent += '<td>' + responseObject.lines[i].masterDesigner + '</td>';

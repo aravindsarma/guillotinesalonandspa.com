@@ -9,10 +9,10 @@ xhr.onload = function() {                       // When readystate changes
     // BUILD UP STRING WITH NEW CONTENT (could also use DOM manipulation)
     var newContent = '<tbody><tr>';
     newContent += '<td><h3>Service</h3></td>';
-    newContent += '<td></td><td><h3>Designer</h3></td>';
-    newContent += '<td></td><td><h3>Creative Designer</h3></td>';
-    newContent += '<td></td><td><h3>Master Designer</h3></td>';
-    newContent += '<td></td><td><h3>Expert Designer</h3></td>';
+    newContent += '<td><h3>Designer</h3></td>';
+    newContent += '<td><h3>Creative Designer</h3></td>';
+    newContent += '<td><h3>Master Designer</h3></td>';
+    newContent += '<td><h3>Expert Designer</h3></td>';
     newContent += '</tr>';
     var n = 0;
     for (var i = 0; i < responseObject.lines.length; i++) { // Loop through object
@@ -66,14 +66,37 @@ xhr.onload = function() {                       // When readystate changes
 	    	  document.getElementById(responseObject.lines[i].service).innerHTML = newContent;
 	      }
       }   //not skincare and microderm and hairremoval
-      else {
-    	  if (i != 0 && responseObject.lines[i].service == 'hairremoval' && responseObject.lines[i-1].service != 'hairremoval') {
+      else if (i != 0 && responseObject.lines[i].service == 'hairremoval'){
+    	  if(i != 0 && responseObject.lines[i].service == 'hairremoval' && responseObject.lines[i-1].service != 'hairremoval'){
     		  newContent += '<tr>';
         	  newContent += '<td></td>';
-        	  newContent += '<td></td><td><b>Waxing</b></td>';
-    	      newContent += '<td></td><td><b>Sugaring</b></td>';
+        	  newContent += '<td></td>';
+        	  newContent += '<td><b>Waxing</b></td>';
+    	      newContent += '<td><b>Sugaring</b></td>';
+    	      newContent += '</tr>';  
+    	  }
+    	  
+	      newContent += '<tr>';
+    	  newContent += '<td><input type="text" class="style" value="' + responseObject.lines[i].style + '"></td>';
+    	  newContent += '<td><input type="text" class="designer" value="' + responseObject.lines[i].designer + '"></td>';
+    	  newContent += '<td><input type="text" class="masterDesigner" value="' + responseObject.lines[i].masterDesigner + '"></td>';
+    	  newContent += '<td><input type="text" class="expertDesigner" value="' + responseObject.lines[i].expertDesigner + '"></td>';
+    	  newContent += '</tr>';
+	      if ((i+1) === responseObject.lines.length) {
+	    	  newContent += '</tbody>';
+	    	  console.log(newContent);
+	    	 document.getElementById(responseObject.lines[i].service).innerHTML = newContent;
+	      }
+      }
+      else {
+    	  /*if (i != 0 && responseObject.lines[i].service == 'hairremoval' && responseObject.lines[i-1].service != 'hairremoval') {
+    		  newContent += '<tr>';
+        	  newContent += '<td></td>';
+        	  newContent += '<td></td>';
+        	  newContent += '<td><b>Waxing</b></td>';
+    	      newContent += '<td><b>Sugaring</b></td>';
     	      newContent += '</tr>';
-    	  }  
+    	  } */ 
     	  newContent += '<tr>';
     	  newContent += '<td><input type="text" class="style" value="' + responseObject.lines[i].style + '"></td>';
     	  newContent += '<td><input type="text" class="masterDesigner" value="' + responseObject.lines[i].masterDesigner + '"></td>';
@@ -119,28 +142,10 @@ $(document).ready(function () {
 	  tablerow.each(function() {
 	   
 		  var style = $(this).find('td .style').val();
-		  
-	      
 		  var designer = $(this).find('td .designer').val();
-	      if ($(this).find('td .dchecked').is(':checked')) {
-		      designer = '<sup>from</sup>' + designer;
-		  }
-	      
 	      var creativeDesigner = $(this).find('td .creativeDesigner').val();
-	      if ($(this).find('td .cchecked').is(':checked')) {
-		      creativeDesigner = '<sup>from</sup>' + creativeDesigner;
-		      }
-	      
 	      var masterDesigner = $(this).find('td .masterDesigner').val();
-	      if ($(this).find('td .mchecked').is(':checked')) {
-		      masterDesigner = '<sup>from</sup>' + masterDesigner;
-		      }
-	      
 	      var expertDesigner = $(this).find('td .expertDesigner').val();
-	      if ($(this).find('td .echecked').is(':checked')) {
-	      expertDesigner = '<sup>from</sup>' + expertDesigner;
-	      }
-	      
 	      
 	      if (style) {
 	      arr.push({
@@ -155,22 +160,35 @@ $(document).ready(function () {
 	  })
 	}
 	
+	function formtoarrayHairremoval(hairremoval) {
+		var tablerow1 = $(hairremoval).find('tr');
+		  tablerow1.each(function() {
+		   
+			  var styleHairremoval = $(this).find('td .style').val();
+		      var designerHairremoval = $(this).find('td .designer').val();
+		      var masterDesignerHairremoval = $(this).find('td .masterDesigner').val();
+		      var expertDesignerHairremoval = $(this).find('td .expertDesigner').val();
+      
+		      if (styleHairremoval) {
+		      arr.push({
+		    	service: hairremoval.substring(1),
+		    	style: styleHairremoval,
+		    	designer: designerHairremoval,
+		    	masterDesigner: masterDesignerHairremoval,
+		    	expertDesigner: expertDesignerHairremoval
+		    })
+		    }
+		  })
+		} 
+	
 	function formtoarray1(service1) {
 		var tablerow1 = $(service1).find('tr');
 		  tablerow1.each(function() {
 		   
 			  var style1 = $(this).find('td .style').val();
-			  
 		      var masterDesigner1 = $(this).find('td .masterDesigner').val();
-		      if ($(this).find('td .mchecked').is(':checked')) {
-			      masterDesigner1 = '<sup>from</sup>' + masterDesigner1;
-			      }
-		      
 		      var expertDesigner1 = $(this).find('td .expertDesigner').val();
-		      if ($(this).find('td .echecked').is(':checked')) {
-		      expertDesigner1 = '<sup>from</sup>' + expertDesigner1;
-		      }
-      
+
 		      if (style1) {
 		      arr.push({
 		    	service: service1.substring(1),
@@ -190,7 +208,7 @@ $(document).ready(function () {
 	
 	formtoarray1('#skincare');
 	formtoarray1('#microderm');
-	formtoarray1('#hairremoval');
+	formtoarrayHairremoval('#hairremoval');
 	formtoarray1('#massage'); 
 	
 	
